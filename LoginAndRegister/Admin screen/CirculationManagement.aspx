@@ -28,14 +28,14 @@
                         <div class="row mt-3 mb-3">
                             <div class="col-md-6">
                          
-                                <asp:TextBox ID="txtusername" CssClass="form-control border-0 shadow" placeholder="UserName" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtusername" onInput="validatemaxlength15(event)" CssClass="form-control border-0 shadow" placeholder="UserName" runat="server"></asp:TextBox>
                                        <asp:Label ID="lblusername" runat="server" Font-Size="X-Small" ForeColor="red" Text=""></asp:Label>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator2" ControlToValidate="txtusername" runat="server" Display="Dynamic" ValidationGroup="s1" ValidationExpression="^(?=(?:\D*\d){0,10}\D*$)[a-zA-Z0-9\s]{0,10}$"
                                     ErrorMessage="Enter a valid userid"></asp:RegularExpressionValidator>
 
                             </div>
                             <div class="col-md-6">
-                                <asp:TextBox ID="txtbookid" CssClass="form-control border-0 shadow" placeholder="BookID" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtbookid" onInput="validatemaxlength4(event)" CssClass="form-control border-0 shadow" placeholder="BookID" runat="server"></asp:TextBox>
                                 <asp:Label ID="lblbookid" runat="server"  Font-Size="X-Small" ForeColor="red" Text=""></asp:Label>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtbookid" runat="server" Display="Dynamic" ValidationGroup="s1" ValidationExpression="^\d{4}$" ErrorMessage="Enter a valid Bookid"></asp:RegularExpressionValidator>
                             </div>

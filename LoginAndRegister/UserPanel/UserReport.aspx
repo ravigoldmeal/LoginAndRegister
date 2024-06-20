@@ -51,6 +51,10 @@
                                 <asp:BoundField DataField="Username" HeaderText="Username" />
                                 <asp:BoundField DataField="BookId" HeaderText="Book ID" />
                                 <asp:BoundField DataField="BookName" HeaderText="Book Name" />
+                                <asp:BoundField DataField="IssueDate" HeaderText="IssueDate"
+                                    DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="False" />
+                                <asp:BoundField DataField="ReturnDate" HeaderText="ReturnDate"
+                                    DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="False" />
                                 <asp:BoundField DataField="DueDate" HeaderText="DueDate"
                                     DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="False" />
 

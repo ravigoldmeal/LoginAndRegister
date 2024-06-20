@@ -10,6 +10,48 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <link href="css/site.css" rel="stylesheet" />
+    <script>
+        function validateInput(event) {
+            var input = event.target;
+            var value = input.value;
+            input.value = value.replace(/[^a-zA-Z\s]/g, '');
+            if (input.value.length > 20) {
+                input.value = input.value.slice(0, 20);
+            }
+        }
+        function validateMobileNo(event) {
+            var input = event.target;
+            var value = input.value;
+            input.value = value.replace(/[^0-9]/g, '');
+            if (input.value.length > 10) {
+                input.value = input.value.slice(0, 10);
+            }
+        }
+        function validatemaxlength12(event) {
+            var input = event.target;
+            var value = input.value;
+            
+            if (input.value.length > 12) {
+                input.value = input.value.slice(0, 12);
+            }
+        }
+        function validatemaxlength15(event) {
+            var input = event.target;
+            var value = input.value;
+
+            if (input.value.length > 15) {
+                input.value = input.value.slice(0, 15);
+            }
+        }
+        function validatemaxlength50(event) {
+            var input = event.target;
+            var value = input.value;
+
+            if (input.value.length > 50) {
+                input.value = input.value.slice(0, 50);
+            }
+        }
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -33,14 +75,14 @@
                 <tr>
                     <td>Username : </td>
                     <td>
-                        <asp:TextBox ID="txtusername" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtusername" onInput="validatemaxlength15(event)" runat="server"></asp:TextBox>
 
                     </td>
                 </tr>
                 <tr>
                     <td>Password:</td>
                     <td>
-                        <asp:TextBox ID="txtpassword" TextMode="Password" runat="server"></asp:TextBox></td>
+                        <asp:TextBox ID="txtpassword" onInput="validatemaxlength15(event)" TextMode="Password" runat="server"></asp:TextBox></td>
 
                 </tr>
 

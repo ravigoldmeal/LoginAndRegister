@@ -49,15 +49,8 @@ namespace LoginAndRegister.UserPanel
                             txtcity.Text = reader["City"].ToString();
                             txtmobileno.Text = reader["MobileNo"].ToString();
                             txtemail.Text = reader["EmailId"].ToString();
-                            DateTime dob;
-                            if (DateTime.TryParse(reader["DateOfBirth"].ToString(), out dob))
-                            {
-                                txtdob.Text = dob.ToString("dd-MM-yyyy");
-                            }
-                            else
-                            {
-                                txtdob.Text = ""; 
-                            }
+                            DateTime dob = Convert.ToDateTime(reader["DateOfBirth"]);
+                            txtdob.Text = dob.ToString("yyyy-MM-dd");
 
                             txtusername.Text = reader["Username"].ToString();
                         }

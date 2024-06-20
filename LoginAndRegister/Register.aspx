@@ -11,6 +11,49 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        function validateInput(event) {
+            var input = event.target;
+            var value = input.value;
+            input.value = value.replace(/[^a-zA-Z\s]/g, '');
+            if (input.value.length > 20) {
+                input.value = input.value.slice(0, 20);
+            }
+        }
+        function validateMobileNo(event) {
+            var input = event.target;
+            var value = input.value;
+            input.value = value.replace(/[^0-9]/g, '');
+            if (input.value.length > 10) {
+                input.value = input.value.slice(0, 10);
+            }
+        }
+        function validatemaxlength12(event) {
+            var input = event.target;
+            var value = input.value;
+    
+            if (input.value.length > 12) {
+                input.value = input.value.slice(0, 12);
+            }
+        }
+        function validatemaxlength15(event) {
+            var input = event.target;
+            var value = input.value;
+          
+            if (input.value.length > 15) {
+                input.value = input.value.slice(0, 15);
+            }
+        }
+        function validatemaxlength50(event) {
+            var input = event.target;
+            var value = input.value;
+     
+            if (input.value.length > 50) {
+                input.value = input.value.slice(0, 50);
+            }
+        }
+
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -25,7 +68,7 @@
                 <tr>
                     <td>Name</td>
                     <td>
-                        <asp:TextBox ID="txtname"  runat="server"   CssClass="form-control" EnableViewState="False"></asp:TextBox>
+                        <asp:TextBox ID="txtname"  onInput="validateInput(event)" runat="server"   CssClass="form-control" EnableViewState="False"></asp:TextBox>
                         <asp:RequiredFieldValidator runat="server" ErrorMessage="Required" ID="valname" ControlToValidate="txtname" ForeColor="Red" 
                             Display="Dynamic" ValidationGroup="registration" EnableViewState="False"></asp:RequiredFieldValidator>
 
@@ -37,19 +80,19 @@
                 <tr>
                     <td>Address</td>
                     <td>
-                        <asp:TextBox ID="txtaddress" runat="server" CssClass="form-control" EnableViewState="False"></asp:TextBox>
+                        <asp:TextBox ID="txtaddress" runat="server" OnInput="validatemaxlength50(event)" CssClass="form-control" EnableViewState="False"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td>City</td>
                     <td>
-                        <asp:TextBox ID="txtcity" runat="server" CssClass="form-control" EnableViewState="False"></asp:TextBox>
+                        <asp:TextBox ID="txtcity" onInput="validatemaxlength15(event)" runat="server" CssClass="form-control" EnableViewState="False"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td>Mobile No</td>
                     <td>
-                        <asp:TextBox ID="txtmobile" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                        <asp:TextBox ID="txtmobile" runat="server" onInput="validateMobileNo(event)" CssClass="form-control" TextMode="Number"></asp:TextBox>
                         <asp:RequiredFieldValidator runat="server" ErrorMessage="Required" ID="RequiredFieldValidator1" ControlToValidate="txtmobile" ForeColor="Red" Display="Dynamic" ValidationGroup="registration" EnableViewState="False"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator runat="server" ErrorMessage="Enter Valid Number" Display="Dynamic" ControlToValidate="txtmobile" ID="valmobileno" ForeColor="#0066FF" ValidationExpression="^[6-9]\d{9}$" ValidationGroup="registration"></asp:RegularExpressionValidator><asp:Label runat="server" ID="libMobileNo" Text=""></asp:Label>
                     </td>
@@ -57,7 +100,7 @@
                 <tr>
                     <td>Email ID</td>
                     <td>
-                        <asp:TextBox ID="txtemail" runat="server" CssClass="form-control" EnableViewState="False"></asp:TextBox>
+                        <asp:TextBox ID="txtemail" runat="server" OnInput="validatemaxlength50(event)" CssClass="form-control" EnableViewState="False"></asp:TextBox>
                         <asp:RequiredFieldValidator runat="server" ErrorMessage="Required" ID="RequiredFieldValidator2" ControlToValidate="txtemail" ForeColor="Red" Display="Dynamic" ValidationGroup="registration"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator runat="server" ErrorMessage="Enter Valid Email" Display="Dynamic" ControlToValidate="txtemail" ID="valemail" ForeColor="#0066FF" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ValidationGroup="registration"></asp:RegularExpressionValidator><asp:Label runat="server" ID="libEmailid" Text=""></asp:Label>
                     </td>
@@ -69,6 +112,7 @@
                             <asp:ListItem Text="Select User Type" Value=""></asp:ListItem>
                             <asp:ListItem Text="Admin" Value="Admin"></asp:ListItem>
                             <asp:ListItem Text="User" Value="User"></asp:ListItem>
+                            <asp:ListItem Text="Librarian" Value="Librarian"></asp:ListItem>
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator runat="server" ErrorMessage="Required" ID="RequiredFieldValidator3" ControlToValidate="userType" ForeColor="Red" Display="Dynamic" ValidationGroup="registration"></asp:RequiredFieldValidator>
                     </td>
@@ -99,7 +143,7 @@
                 <tr>
                     <td>Username</td>
                     <td>
-                        <asp:TextBox ID="txtusername" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txtusername" runat="server" onInput="validatemaxlength15(event)" CssClass="form-control"></asp:TextBox>
                         <asp:RegularExpressionValidator runat="server" ControlToValidate="txtusername" ValidationGroup="registration" ValidationExpression="^.{4,}$" Display="Dynamic" ForeColor="#0066FF" ID="RegularExpressionValidator2" ErrorMessage="Enter in valid format"></asp:RegularExpressionValidator>
                         <asp:RequiredFieldValidator runat="server" ErrorMessage="Required" ID="RequiredFieldValidator6" ControlToValidate="txtusername" ForeColor="Red" Display="Dynamic" ValidationGroup="registration" EnableViewState="False"></asp:RequiredFieldValidator><asp:Label runat="server" ID="libusername" Text=""></asp:Label>
                     </td>
@@ -107,7 +151,7 @@
                 <tr>
                     <td>Password</td>
                     <td>
-                        <asp:TextBox ID="txtpassword" runat="server" CssClass="form-control" TextMode="Password" ValidationGroup="registration"></asp:TextBox>
+                        <asp:TextBox ID="txtpassword" runat="server" onInput="validatemaxlength15(event)" CssClass="form-control" TextMode="Password" ValidationGroup="registration"></asp:TextBox>
                         <asp:RegularExpressionValidator runat="server" ControlToValidate="txtpassword" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$" ValidationGroup="registration" Display="Dynamic" ForeColor="#0066FF" ID="valpass" ErrorMessage="Enter in valid format"></asp:RegularExpressionValidator>
                         <asp:RequiredFieldValidator runat="server" ErrorMessage="Required" ID="RequiredFieldValidator7" ControlToValidate="txtpassword" ForeColor="Red" ValidationGroup="registration"></asp:RequiredFieldValidator>
                     </td>

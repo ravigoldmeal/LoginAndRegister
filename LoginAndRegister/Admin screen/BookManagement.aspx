@@ -23,20 +23,20 @@
                                 <asp:Label ID="lblinserterror" runat="server" Text=""></asp:Label>
 
                                 <div class="form-floating py-2 col-12">
-                                    <asp:TextBox runat="server" ID="TextBox1" CssClass="form-control border-0 shadow" ></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="TextBox1" onInput="validatemaxlength15(event)" CssClass="form-control border-0 shadow" ></asp:TextBox>
                                     <label class="control-label mb-3">Title</label>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="insert" runat="server" ErrorMessage="Required title" ControlToValidate="TextBox1" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                                 </div>
 
                                 <div class="form-floating py-2 col-12">
-                                    <asp:TextBox runat="server" ID="TextBox2" CssClass="form-control border-0 shadow" ></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="TextBox2" onInput="validatemaxlength15(event)"  CssClass="form-control border-0 shadow" ></asp:TextBox>
                                     <label class="control-label mb-3">Author</label>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="insert"  runat="server" ErrorMessage="Required Author" ControlToValidate="TextBox2" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
 
                                 </div>
 
                                 <div class="form-floating py-2 col-12">
-                                    <asp:TextBox runat="server" CssClass="form-control border-0 shadow" ID="TextBox3"></asp:TextBox>
+                                    <asp:TextBox runat="server" onInput="validatemaxlength50(event)" CssClass="form-control border-0 shadow" ID="TextBox3"></asp:TextBox>
                                     <label class="control-label mb-3">Genre</label>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3"  ValidationGroup="insert"  runat="server" ErrorMessage="Required Genre" ControlToValidate="TextBox3" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
 
@@ -78,7 +78,7 @@
                                 </div>
 
                                 <div class="form-floating py-2 col-12">
-                                    <asp:TextBox runat="server" CssClass="form-control border-0 shadow" ID="TextBox5" ></asp:TextBox>
+                                    <asp:TextBox runat="server" onInput="validatemaxlength4(event)" CssClass="form-control border-0 shadow" ID="TextBox5" ></asp:TextBox>
                                     <label class="control-label mb-3">Quantity</label>
                                     <asp:RangeValidator ID="RangeValidator1" runat="server" MinimumValue="1" MaximumValue="50" ValidationGroup="insert"  Type="Integer" ErrorMessage="Quantity must range between 0 - 50" ControlToValidate="TextBox5" Display="Dynamic" ForeColor="Red"> </asp:RangeValidator>
 
@@ -86,7 +86,7 @@
                                 </div>
 
                                 <div class="form-floating py-2 col-12">
-                                    <asp:TextBox runat="server" CssClass="form-control border-0 shadow" ID="TextBox6"></asp:TextBox>
+                                    <asp:TextBox runat="server" onInput="validatemaxlength4(event)" CssClass="form-control border-0 shadow" ID="TextBox6"></asp:TextBox>
                                     <label class="control-label mb-3">MaximumDays</label>
                                     <asp:RangeValidator ID="RangeValidator3" runat="server" ValidationGroup="insert"  MinimumValue="1" MaximumValue="13" Type="Integer" ErrorMessage="Max days should be between 1 and 12" ControlToValidate="TextBox6" Display="Dynamic" ForeColor="Red"> </asp:RangeValidator>
 

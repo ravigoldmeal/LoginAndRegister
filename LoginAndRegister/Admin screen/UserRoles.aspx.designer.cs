@@ -7,74 +7,56 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LoginAndRegister
+namespace LoginAndRegister.Admin_screen
 {
 
 
-    public partial class Home
+    public partial class UserRoles
     {
 
         /// <summary>
-        /// form1 control.
+        /// chkAdmin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.CheckBoxList chkAdmin;
 
         /// <summary>
-        /// lblinfo control.
+        /// chkLibrarian control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblinfo;
+        protected global::System.Web.UI.WebControls.CheckBoxList chkLibrarian;
 
         /// <summary>
-        /// lblTotalactive control.
+        /// btnlibrarian control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalactive;
+        protected global::System.Web.UI.WebControls.Button btnlibrarian;
 
         /// <summary>
-        /// lblTotalinactive control.
+        /// chkUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalinactive;
+        protected global::System.Web.UI.WebControls.CheckBoxList chkUser;
 
         /// <summary>
-        /// lblTotalusers control.
+        /// brnuser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalusers;
-
-        /// <summary>
-        /// empgrid control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView empgrid;
-
-        /// <summary>
-        /// btnLogout control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLogout;
+        protected global::System.Web.UI.WebControls.Button brnuser;
     }
 }

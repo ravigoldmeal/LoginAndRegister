@@ -10,6 +10,10 @@ using System.Web.UI.WebControls;
 using Microsoft.AspNetCore.Authorization;
 using System.Drawing;
 using static System.Net.Mime.MediaTypeNames;
+using System.Runtime.Remoting.Messaging;
+using System.IO;
+using System.Reflection;
+using System.Xml.Linq;
 
 namespace LoginAndRegister.Admin_screen
 {
@@ -17,6 +21,7 @@ namespace LoginAndRegister.Admin_screen
     public partial class AdminPanel : System.Web.UI.Page
     {
         DBConnect dbcon = new DBConnect();
+        string Username = HttpContext.Current.User.Identity.Name;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -58,6 +63,7 @@ namespace LoginAndRegister.Admin_screen
         {
 
             SqlCommand cmd = new SqlCommand("ShowDataForAdmin", dbcon.GetCon());
+           
             dbcon.OpenCon();
             empgrid.DataSource = cmd.ExecuteReader();
             empgrid.DataBind();
@@ -78,6 +84,7 @@ namespace LoginAndRegister.Admin_screen
                         SqlCommand cmd = new SqlCommand("DeleteUser", dbcon.GetCon());
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@SlNo", id);
+                        cmd.Parameters.AddWithValue("@userid", Username);
                         dbcon.OpenCon();
                         cmd.ExecuteNonQuery();
                     }
@@ -110,7 +117,56 @@ namespace LoginAndRegister.Admin_screen
             dbcon.CloseCon();
             return isActive;
         }
+        protected void btnInsert_Click1(object sender, EventArgs e)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("InsertUser", dbcon.GetCon());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Name", txtName.Text);
+                cmd.Parameters.AddWithValue("@Address", txtAddres.Text);
+                cmd.Parameters.AddWithValue("@City", txtcity.Text);
+                cmd.Parameters.AddWithValue("@MobileNo", txtmobile.Text);
+                cmd.Parameters.AddWithValue("@EmailId", txtemail.Text);
+                cmd.Parameters.AddWithValue("@UserType", userType.Text);
+                cmd.Parameters.AddWithValue("@Gender", btngender.SelectedValue);
+                cmd.Parameters.AddWithValue("@DateOfBirth", txtdob.Text);
+                cmd.Parameters.AddWithValue("@IsActive", chkIsActive.Checked);
+                cmd.Parameters.AddWithValue("@Username", txtUsername.Text);
+                cmd.Parameters.AddWithValue("@Password", txtPassword.Text);
+                cmd.Parameters.AddWithValue("@userid", Username);
 
+                dbcon.OpenCon();
+                cmd.ExecuteNonQuery();            
+                Response.Redirect("Login Page.aspx");
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627)
+                {
+
+                    if (ex.Message.Contains("Username"))
+                        lblinfo.Text += "Username already exists.";
+                    else if (ex.Message.Contains("EmailId"))
+                        lblinfo.Text += "Email ID already exists.";
+                    else if (ex.Message.Contains("MobileNo"))
+                        lblinfo.Text += "Mobile number already exists.";
+
+                }
+                else
+                {
+                    lblinfo.Text = "An error occurred: " + ex.Message;
+                }
+            }
+            catch (Exception ex)
+            {
+                lblinfo.Text = "An error occurred: " + ex.Message;
+            }
+            finally
+            {
+                dbcon.CloseCon();
+            }
+        }
 
         protected void empgrid_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -128,25 +184,28 @@ namespace LoginAndRegister.Admin_screen
             if (ds.Tables.Count > 0)
             {
                 DataTable dt = ds.Tables["user"];
-
-
                 if (dt.Rows.Count > 0)
                 {
                     DataRow dr = dt.Rows[0];
-
                     txtName.Text = dr["Name"].ToString();
                     txtAddres.Text = dr["Address"].ToString();
                     txtcity.Text = dr["City"].ToString();
                     txtmobile.Text = dr["MobileNo"].ToString();
                     txtemail.Text = dr["EmailId"].ToString();
                     userType.SelectedValue = dr["UserType"].ToString();
-                    btngender.SelectedValue = dr["Gender"].ToString() ;
+                    btngender.SelectedValue = dr["Gender"].ToString();
                     chkIsActive.Checked = dr["IsActive"].ToString().Equals("True");
+                    //txtdob.Text = dr["DateOfBirth"]
+                    DateTime dob = Convert.ToDateTime(dr["DateOfBirth"]);
+                    txtdob.Text = dob.ToString("yyyy-MM-dd");
+                    txtUsername.Text = dr["Username"].ToString();
+
 
                 }
             }
 
         }
+
         private void clearData()
         {
             txtName.Text = string.Empty;
@@ -157,6 +216,9 @@ namespace LoginAndRegister.Admin_screen
             userType.ClearSelection();
             btngender.ClearSelection();
             chkIsActive.Checked = false;
+            txtUsername.Text = string.Empty;
+            txtdob.Text= string.Empty;
+            
 
         }
 
@@ -176,7 +238,9 @@ namespace LoginAndRegister.Admin_screen
                 cmd.Parameters.AddWithValue("@UserType", userType.SelectedValue);
                 cmd.Parameters.AddWithValue("@Gender", btngender.SelectedValue);
                 cmd.Parameters.AddWithValue("@IsActive", chkIsActive.Checked);
-
+                cmd.Parameters.AddWithValue("@DateOfBirth", txtdob.Text);
+                cmd.Parameters.AddWithValue("Username" , txtUsername.Text);
+                cmd.Parameters.AddWithValue("@userid", Username);
                 dbcon.OpenCon();
                 cmd.ExecuteNonQuery();
                 lblinfo.Text = "Record updated";
@@ -187,7 +251,7 @@ namespace LoginAndRegister.Admin_screen
                 {
 
                     string duplicateColumn = "";
-                    string[] duplicateColumns = { "Email", "MobileNo" };
+                    string[] duplicateColumns = { "Email", "MobileNo" ,"Username" };
 
                     foreach (string column in duplicateColumns)
                     {
@@ -229,6 +293,8 @@ namespace LoginAndRegister.Admin_screen
         {
 
         }
+
+     
     }
 }
     

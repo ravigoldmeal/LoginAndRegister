@@ -93,13 +93,13 @@ namespace LoginAndRegister.Admin_screen
                 cmd.Parameters.AddWithValue("@IsPopular", isPopular);
                 cmd.Parameters.AddWithValue("@RackNo", rackNo);
 
-                FileUpload bookimage = FindControl("FileUpload1") as FileUpload;
-                if (bookimage.HasFile)
+                //FileUpload bookimage = FindControl("FileUpload1") as FileUpload;
+                if (FileUpload1.HasFile)
                 {
-                    string fileName = Path.GetFileName(bookimage.FileName);
+                    string fileName = Path.GetFileName(FileUpload1.FileName);
                     string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(fileName);
                     string filePath = Server.MapPath("~/Uploads/" + uniqueFileName);
-                    bookimage.SaveAs(filePath);
+                    FileUpload1.SaveAs(filePath);
                     cmd.Parameters.AddWithValue("@BookImage", uniqueFileName);
                 }
                 else

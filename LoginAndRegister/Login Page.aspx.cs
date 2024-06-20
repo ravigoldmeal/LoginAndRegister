@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -64,6 +65,9 @@ namespace LoginAndRegister
                         {
                             FormsAuthentication.SetAuthCookie(username, false);
 
+                          
+                            Session["UserRole"] = userRole;
+
                             if (chkRemember.Checked)
                             {
                                 FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, username, DateTime.Now, DateTime.Now.AddDays(30), true, userRole);
@@ -80,6 +84,10 @@ namespace LoginAndRegister
                                 Response.Redirect("~/UserPanel/UserHome.aspx");
                             }
                             else if (userRole == "Admin")
+                            {
+                                Response.Redirect("~/Admin screen/AdminHome.aspx");
+                            }
+                            else if (userRole == "Librarian")
                             {
                                 Response.Redirect("~/Admin screen/AdminHome.aspx");
                             }

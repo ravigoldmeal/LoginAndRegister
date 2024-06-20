@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="UserManagement" Language="C#" MasterPageFile="~/Admin screen/AdminMaster.Master" UnobtrusiveValidationMode="none" AutoEventWireup="true" CodeBehind="AdminPanel.aspx.cs" Inherits="LoginAndRegister.Admin_screen.AdminPanel" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
@@ -39,7 +40,7 @@
                 <div class="card-header bg-secondary bg-gradient mt-0 py-3">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <h2 class="text-white py-2">User Details</h2>
+                            <h2 class="text-white py-2"><%= ViewState["SlNo"] != null ? "Update" : "Insert" %>User Details</h2>
                         </div>
                     </div>
                 </div>
@@ -53,25 +54,25 @@
 
                                 <div class="row mt-3">
                                     <div class="col-md-6">
-                                        <asp:TextBox runat="server" ID="txtName" CssClass="form-control border-0 shadow"></asp:TextBox>
+                                        <asp:TextBox runat="server" onInput="validateInput(event)" ID="txtName" CssClass="form-control border-0 shadow"></asp:TextBox>
                                         <label class="control-label mb-3">Name</label>
 
-                                        <asp:RequiredFieldValidator runat="server" ErrorMessage="Required" ID="RequiredFieldValidator1" 
+                                        <asp:RequiredFieldValidator runat="server" ErrorMessage="Required" ID="RequiredFieldValidator1"
                                             ControlToValidate="txtname" ForeColor="Red" Display="Dynamic" ValidationGroup="update" EnableViewState="False">
                                         </asp:RequiredFieldValidator>
-                                      
+
                                         <asp:RegularExpressionValidator runat="server" ErrorMessage="Enter Valid Name" Display="Dynamic" ControlToValidate="txtname"
-                                            ID="RegularExpressionValidator2" ValidationGroup="update" ForeColor="#0066FF" 
+                                            ID="RegularExpressionValidator2" ValidationGroup="update" ForeColor="#0066FF"
                                             ValidationExpression="^(?:[A-Za-z]{1,30})(?: [A-Za-z]{1,30})?$"></asp:RegularExpressionValidator>
                                     </div>
                                     <div class="col-md-6">
-                                        <asp:TextBox runat="server" CssClass="form-control border-0 shadow" TextMode="Number" ID="txtmobile"></asp:TextBox>
+                                        <asp:TextBox runat="server" onInput="validateMobileNo(event)" CssClass="form-control border-0 shadow" TextMode="Number" ID="txtmobile"></asp:TextBox>
                                         <label class="control-label mb-3">MobileNo</label>
 
-                                        <asp:RequiredFieldValidator runat="server" ErrorMessage="Required" ID="RequiredFieldValidator6" ControlToValidate="txtmobile" 
+                                        <asp:RequiredFieldValidator runat="server" ErrorMessage="Required" ID="RequiredFieldValidator6" ControlToValidate="txtmobile"
                                             ForeColor="Red" Display="Dynamic" ValidationGroup="update" EnableViewState="False"></asp:RequiredFieldValidator>
 
-                                        <asp:RegularExpressionValidator runat="server" ErrorMessage="Enter Valid Number" Display="Dynamic" ControlToValidate="txtmobile" 
+                                        <asp:RegularExpressionValidator runat="server" ErrorMessage="Enter Valid Number" Display="Dynamic" ControlToValidate="txtmobile"
                                             ID="RegularExpressionValidator3" ForeColor="#0066FF" ValidationExpression="^[6-9]\d{9}$" ValidationGroup="update">
 
                                         </asp:RegularExpressionValidator><asp:Label runat="server" ID="Label1" Text=""></asp:Label>
@@ -79,10 +80,10 @@
                                 </div>
                                 <div class="row ">
                                     <div class="col-md-6">
-                                        <asp:TextBox runat="server" ID="txtemail" CssClass="form-control border-0 shadow"></asp:TextBox>
+                                        <asp:TextBox runat="server" onInput="validatemaxlength50(event)" ID="txtemail" CssClass="form-control border-0 shadow"></asp:TextBox>
                                         <label class="control-label mb-3">Email ID</label>
 
-                                        <asp:RequiredFieldValidator runat="server" ErrorMessage="Required" ID="RequiredFieldValidator3" ControlToValidate="txtemail" 
+                                        <asp:RequiredFieldValidator runat="server" ErrorMessage="Required" ID="RequiredFieldValidator3" ControlToValidate="txtemail"
                                             ForeColor="Red" Display="Dynamic" ValidationGroup="update"></asp:RequiredFieldValidator>
 
                                         <asp:RegularExpressionValidator runat="server" ErrorMessage="Enter Valid Email" Display="Dynamic" ControlToValidate="txtemail"
@@ -91,43 +92,77 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <asp:TextBox runat="server" ID="txtcity" CssClass="form-control border-0 shadow"></asp:TextBox>
-                                        <label class="control-label mb-3">City</label>
+
+                                        <asp:TextBox runat="server" ID="txtUsername" onInput="validatemaxlength15(event)" CssClass="form-control border-0 shadow"></asp:TextBox>
+                                        <label class="control-label mb-3">Username</label>
+                                        <asp:RegularExpressionValidator runat="server" ControlToValidate="txtUsername" ValidationGroup="Update" ValidationExpression="^.{4,}$" Display="Dynamic" ForeColor="#0066FF" ID="RegularExpressionValidator1" ErrorMessage="Enter in valid format"></asp:RegularExpressionValidator>
+                                        <asp:RequiredFieldValidator runat="server" ErrorMessage="Required" ID="RequiredFieldValidator2" ControlToValidate="txtUsername" ForeColor="Red" Display="Dynamic" ValidationGroup="update" EnableViewState="False"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
-                                <div class="form-floating py-2 col-12">
-                                    <asp:TextBox runat="server" ID="txtAddres" CssClass="form-control border-0 shadow"></asp:TextBox>
-                                    <label class="control-label mb-3">Address</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <asp:TextBox runat="server" ID="txtcity" onInput="validatemaxlength15(event)" CssClass="form-control border-0 shadow"></asp:TextBox>
+                                        <label class="control-label mb-3">City</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <asp:TextBox runat="server" onInput="validatemaxlength50(event)" ID="txtAddres" CssClass="form-control border-0 shadow"></asp:TextBox>
+                                        <label class="control-label mb-3">Address</label>
+                                    </div>
                                 </div>
                                 <div class="row ">
+                                    <div class="col-md-4">
+                                        <asp:TextBox ID="txtdob" TextMode="Date" CssClass="form-control border-0 shadow" runat="server"></asp:TextBox>
+                                        <label class="control-label mb-3">DOB</label>
+                                        <asp:RequiredFieldValidator runat="server" ErrorMessage="Required" ID="RequiredFieldValidator5" ControlToValidate="txtdob" ForeColor="Red" ValidationGroup="update"></asp:RequiredFieldValidator>
+
+                                    </div>
                                     <div class="col-md-4">
                                         <asp:DropDownList ID="userType" runat="server" DataTextField="Text" DataValueField="Value">
                                             <asp:ListItem Text="Select User Type" Value=""></asp:ListItem>
                                             <asp:ListItem Text="Admin" Value="Admin"></asp:ListItem>
                                             <asp:ListItem Text="User" Value="User"></asp:ListItem>
+                                            <asp:ListItem Text="Librarian" Value="Librarian"></asp:ListItem>
                                         </asp:DropDownList>
+                                        <label class="control-label mb-3">User Type</label>
                                         <asp:RequiredFieldValidator runat="server" ErrorMessage="Required" ID="RequiredFieldValidator4" ControlToValidate="userType"
                                             ForeColor="Red" Display="Dynamic" ValidationGroup="update"></asp:RequiredFieldValidator>
-
-                                        <label class="control-label mb-3">User Type</label>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         <asp:CheckBox ID="chkIsActive" runat="server" CssClass="form-check-inline" ValidationGroup="update" />
                                         <label class="control-label mb-3">IsActive</label>
-
-
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         <asp:RadioButtonList ID="btngender" runat="server" CssClass="form-check-inline" RepeatDirection="Horizontal" ValidationGroup="update">
                                             <asp:ListItem Text="Male" Value="Male"></asp:ListItem>
                                             <asp:ListItem Text="Female" Value="Female"></asp:ListItem>
                                         </asp:RadioButtonList>
                                     </div>
 
+
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <% if (ViewState["SlNo"] != null)
+                                        { %>
+
+                                    <% }
+                                        else
+                                        { %>
+                                            <asp:TextBox ID="txtPassword" TextMode="Password" onInput="validatemaxlength15(event)" CssClass="form-control border-0 shadow" runat="server"></asp:TextBox>
+                                            <label class="control-label mb-3">Password</label>
+                                            <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPassword" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$" ValidationGroup="update"  Display="Dynamic" ForeColor="red" ID="valpass" ErrorMessage="Enter in valid format"></asp:RegularExpressionValidator>
+                                            <asp:RequiredFieldValidator runat="server" ErrorMessage="Required"  ID="RequiredFieldValidator7" ControlToValidate="txtPassword" ForeColor="Red" ValidationGroup="update"></asp:RequiredFieldValidator>
+                                    <% } %>
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-6 col-md-3">
+                                        <% if (ViewState["SlNo"] != null)
+                                            { %>
                                         <asp:Button ID="btnUpd" runat="server" Text="Update" ValidationGroup="update" class="btn btn-success" OnClick="btnUpd_Click" />
+                                        <% }
+                                            else
+                                            { %>
+                                        <asp:Button ID="btnInsert" runat="server" Text="Insert" ValidationGroup="update" class="btn btn-success" OnClick="btnInsert_Click1" />
+                                        <% } %>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <asp:Button ID="btnCancel" runat="server" Text="Cancel" class="btn btn-outline-secondary border form-control" OnClick="btnCancel_Click" />
@@ -136,8 +171,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -157,7 +190,7 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:CommandField ShowSelectButton="true" SelectText="Edit" HeaderText="Update" ControlStyle-CssClass="btn btn-success" />
-                    <asp:BoundField HeaderText="SlNo" DataField="SlNo" ReadOnly="true" />
+     
                     <asp:TemplateField HeaderText="Name">
                         <ItemTemplate>
                             <asp:Label runat="server" Text='<%# Eval("Name") %>'></asp:Label>
@@ -215,8 +248,7 @@
                     <asp:BoundField HeaderText="LModifyDt" DataField="LModifyDt" ReadOnly="true" />
                     <asp:BoundField HeaderText="DelUID" DataField="DelUID" ReadOnly="true" />
                     <asp:BoundField HeaderText="DelDt" DataField="DelDt" ReadOnly="true" />
-                    <asp:BoundField HeaderText="LogNo" DataField="LogNo" ReadOnly="true" />
-                    <asp:BoundField HeaderText="UniqueKey" DataField="UniqueKey" ReadOnly="true" />
+            
                 </Columns>
             </asp:GridView>
         </div>

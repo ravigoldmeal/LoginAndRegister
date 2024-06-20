@@ -13,6 +13,57 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        function validateInput(event) {
+            var input = event.target;
+            var value = input.value;
+            input.value = value.replace(/[^a-zA-Z\s]/g, '');
+            if (input.value.length > 20) {
+                input.value = input.value.slice(0, 20);
+            }
+        }
+        function validateMobileNo(event) {
+            var input = event.target;
+            var value = input.value;
+            input.value = value.replace(/[^0-9]/g, '');
+            if (input.value.length > 10) {
+                input.value = input.value.slice(0, 10);
+            }
+        }
+        function validatemaxlength12(event) {
+            var input = event.target;
+            var value = input.value;
+
+            if (input.value.length > 12) {
+                input.value = input.value.slice(0, 12);
+            }
+        }
+        function validatemaxlength15(event) {
+            var input = event.target;
+            var value = input.value;
+
+            if (input.value.length > 15) {
+                input.value = input.value.slice(0, 15);
+            }
+        }
+        function validatemaxlength50(event) {
+            var input = event.target;
+            var value = input.value;
+
+            if (input.value.length > 50) {
+                input.value = input.value.slice(0, 50);
+            }
+        }
+        function validatemaxlength4(event) {
+            var input = event.target;
+            var value = input.value;
+            input.value = value.replace(/[^0-9]/g, '');
+            if (input.value.length > 4) {
+                input.value = input.value.slice(0, 4);
+            }
+        }
+
+    </script>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -20,36 +71,51 @@
 <body>
     <form id="form1" runat="server">
         <div>
-
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <asp:Image runat="server" ImageUrl="~/images/book.png" Height="45" Width="45" /><h2>LMS</h2>
+                <asp:Image runat="server" ImageUrl="~/images/book.png" Height="45" Width="45" />
+                <h2>LMS</h2>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav" style="width: 100%; overflow-x: auto;">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="AdminHome.aspx">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="AdminPanel.aspx">User Management</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="BookManagement.aspx">Book Management</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="CirculationManagement.aspx">Circulation Management</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="AdminReport.aspx">Reports</a>
-                        </li>
+                        <asp:Panel ID="panelHome" runat="server">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="AdminHome.aspx">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                        </asp:Panel>
+                        <asp:Panel ID="panelUserManagement" runat="server">
+                            <li class="nav-item">
+                                <a class="nav-link" href="AdminPanel.aspx">User Management</a>
+                            </li>
+                        </asp:Panel>
+                        <asp:Panel ID="panelBookManagement" runat="server">
+                            <li class="nav-item">
+                                <a class="nav-link" href="BookManagement.aspx">Book Management</a>
+                            </li>
+                        </asp:Panel>
+                        <asp:Panel ID="panelCirculationManagement" runat="server">
+                            <li class="nav-item">
+                                <a class="nav-link" href="CirculationManagement.aspx">Circulation Management</a>
+                            </li>
+                        </asp:Panel>
+                        <asp:Panel ID="panelUserRoles" runat="server">
+                            <li class="nav-item">
+                                <a class="nav-link" href="UserRoles.aspx">UserRoles</a>
+                            </li>
+                        </asp:Panel>
+                        <asp:Panel ID="panelReports" runat="server">
+                            <li class="nav-item">
+                                <a class="nav-link" href="AdminReport.aspx">Reports</a>
+                            </li>
+                        </asp:Panel>
                     </ul>
                     <ul class="navbar-nav" style="margin-right: 0;">
                         <li class="nav-item">
                             <div class="form-inline my-2 my-lg-0">
                                 <h4 style="padding-right: 10px">
-                                    <asp:Label ID="lblusername" runat="server" Text=""></asp:Label></h4>
+                                    <asp:Label ID="lblusername" runat="server" Text=""></asp:Label>
+                                </h4>
                                 <asp:Button ID="Button1" runat="server" CssClass="btn btn-outline-success my-2 my-sm-0" Text="Logout" ValidationGroup="Logout" OnClick="btnLogout_Click" Style="position: center" />
                             </div>
                         </li>
@@ -57,6 +123,7 @@
                 </div>
             </nav>
         </div>
+
         <div class="jumbotron text-center alert alert-primary" style="margin-bottom: 20px">
             <h1>Library Management System</h1>
             <p>Building community. Inspiring readers,Expanding Book Access!</p>
@@ -76,6 +143,6 @@
 
         </div>
     </form>
-   
+
 </body>
 </html>

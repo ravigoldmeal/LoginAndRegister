@@ -82,9 +82,7 @@ namespace LoginAndRegister
         protected void Login_Click(object sender, EventArgs e)
         {
             Response.Redirect("Login Page.aspx");
-        }
-
-      
+        }      
     }
     }
 

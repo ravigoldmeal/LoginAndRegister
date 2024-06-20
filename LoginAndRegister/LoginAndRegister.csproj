@@ -112,13 +112,13 @@
     <Content Include="Admin screen\BookManagement.aspx" />
     <Content Include="Admin screen\CirculationManagement.aspx" />
     <Content Include="Admin screen\AdminReport.aspx" />
+    <Content Include="Admin screen\UserRoles.aspx" />
     <Content Include="css\site.css" />
     <Content Include="css\sweetalert2.min %281%29.css" />
     <Content Include="css\sweetalert2.min.js" />
     <Content Include="css\toastr.min.css" />
     <Content Include="css\toastr.min.js" />
     <Content Include="Global.asax" />
-    <Content Include="Home.aspx" />
     <Content Include="images\book.png" />
     <Content Include="images\cotton candy back.jpg" />
     <Content Include="images\cotton candy.jpg" />
@@ -183,16 +183,16 @@
     <Compile Include="Admin screen\AdminReport.aspx.designer.cs">
       <DependentUpon>AdminReport.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin screen\UserRoles.aspx.cs">
+      <DependentUpon>UserRoles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin screen\UserRoles.aspx.designer.cs">
+      <DependentUpon>UserRoles.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DBConnect.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Home.aspx.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Home.aspx.designer.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login Page.aspx.cs">
       <DependentUpon>Login Page.aspx</DependentUpon>
